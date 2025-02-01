@@ -17,7 +17,7 @@ const data = [
 ]
 
 
-app.get('/hello world',(req,res)=>{
+app.get('/hello',(req,res)=>{
     res.send('Hello World there')
 })
 
