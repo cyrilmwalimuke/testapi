@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-
+import nodemailer from 'nodemailer'
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -17,7 +17,7 @@ const data = [
 ]
 
 
-app.get('/hello',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send('Hello World there')
 })
 
@@ -26,6 +26,46 @@ app.get('/data',(req,res)=>{
         res.json(data)
     })
 
+
+
+
+
+
+  
+  // Send the email
+
+
+app.post('/nodemailer',(req,res)=>{
+
+    const {from,to,subject,text} = req.body
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "cyrilmwalimuke@gmail.com", // Replace with your Gmail email
+          pass: "sgod awzc wnoq mhat", // Replace with your App Password
+        },
+      });
+      
+      // Email options
+      const mailOptions = {
+        from,
+        to,
+        subject,
+        text,
+      };
+
+
+
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error("Error sending email:", error);
+        } else {
+          console.log("Email sent:", info.response);
+        }
+      });
+
+})
 
 
 
